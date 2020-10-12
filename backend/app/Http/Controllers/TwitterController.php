@@ -50,4 +50,17 @@ class TwitterController extends Controller
 
         return redirect('/');
     }
+
+    // メディアを含むツイートを削除
+    public function delete(Request $request)
+    {
+        $result = \Twitter::get('statuses/user_timeline', ['user_id' => $request->user_name, 'count' => $request->count]);
+        foreach($result as $r) {
+            if(isset($r->entities->media)) {
+                \Twitter::post('statuses/destroy/' . $r->id);
+            }
+        }
+
+        return redirect('/');
+    }
 }

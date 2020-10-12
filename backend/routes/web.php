@@ -28,3 +28,4 @@ Route::get('/login/twitter/callback', [LoginController::class, 'handleTwitterPro
 
 Route::get('/', [TwitterController::class, 'index']);
 Route::post('/tweet', [TwitterController::class, 'tweet'])->name('tweet');
+Route::post('/delete', [TwitterController::class, 'delete'])->name('delete');
