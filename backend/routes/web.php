@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\TwitterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('login/twitter', [LoginController::class, 'redirectToTwitterProvider']);
-Route::get('login/twitter/callback', [LoginController::class, 'handleTwitterProviderCallback']);
+Route::get('/login/twitter', [LoginController::class, 'redirectToTwitterProvider']);
+Route::get('/login/twitter/callback', [LoginController::class, 'handleTwitterProviderCallback']);
+
+Route::get('/', [TwitterController::class, 'index']);
+Route::post('/tweet', [TwitterController::class, 'tweet'])->name('tweet');
