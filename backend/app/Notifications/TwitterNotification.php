@@ -19,10 +19,9 @@ class TwitterNotification extends Notification
      * @return void
      */
     // コンストラクタで値を受け取る
-    public function __construct($text)
+    public function __construct($image)
     {
-        $this->text = $text;
-        // $this->image = $image;
+        $this->image = $image;
     }
 
     /**
@@ -38,8 +37,7 @@ class TwitterNotification extends Notification
 
     public function toTwitter($notifiable)
     {
-        return (new TwitterStatusUpdate($this->text));
-        // ->withImage($this->image->path);
+        return (new TwitterStatusUpdate(''))->withImage($this->image);
     }
 
     /**

@@ -9,6 +9,12 @@ COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
   apt-get install -y nodejs && \
   npm install npm@latest -g && \
+  apt-get update && apt-get install -y imagemagick libmagickwand-dev && \
+  pecl install imagick && \
+  docker-php-ext-enable imagick && \
+  apt-get install -y libfreetype6-dev && \
+  docker-php-ext-configure gd --with-freetype && \
+  docker-php-ext-install -j$(nproc) gd && \
   apt-get update && \
   apt-get -y install git unzip libzip-dev libicu-dev libonig-dev && \
   apt-get clean && \
